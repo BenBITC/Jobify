@@ -4,19 +4,22 @@ import { Logo, FormRow, SubmitButton } from "../components";
 import apiFetch from "../utils/apiFetch";
 import { toast } from "react-toastify";
 
-export const loginAction = async ({ request }) => {
-  const formData = await request.formData();
-  const credentials = Object.fromEntries(formData);
+export const loginAction =
+  (queryClient) =>
+  async ({ request }) => {
+    const formData = await request.formData();
+    const credentials = Object.fromEntries(formData);
 
-  try {
-    await apiFetch.post("/auth/login", credentials);
-    toast.success("Login successful");
-    return redirect("/dashboard");
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
-    return null;
-  }
-};
+    try {
+      await apiFetch.post("/auth/login", credentials);
+      queryClient.invalidateQueries();
+      toast.success("Login successful");
+      return redirect("/dashboard");
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      return null;
+    }
+  };
 
 const Login = () => {
   const navigate = useNavigate();
