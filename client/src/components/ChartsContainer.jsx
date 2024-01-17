@@ -10,18 +10,18 @@ const ChartsContainer = ({ monthlyStats }) => {
   return (
     <Wrapper>
       <h4>Monthly Applications</h4>
-      <button
-        className="btn form-btm"
-        type="button"
-        onClick={() => setBarChart(!barChart)}
-      >
-        {barChart ? "Area Chart" : "Bar Chart"}
-      </button>
       {barChart ? (
         <BarChartComponent data={monthlyStats} />
       ) : (
         <AreaChart data={monthlyStats} />
       )}
+      <button
+        className="btn form-btm"
+        type="button"
+        onClick={() => setBarChart(!barChart)}
+      >
+        {barChart ? "Switch to Area Chart" : "Switch to Bar Chart"}
+      </button>
     </Wrapper>
   );
 };

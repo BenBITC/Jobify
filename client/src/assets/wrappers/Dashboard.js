@@ -10,13 +10,6 @@ const Wrapper = styled.section`
     margin: 0 auto;
     padding: 2rem 0;
   }
-  .loading-container {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   @media (min-width: 992px) {
     .dashboard {
       grid-template-columns: auto 1fr;

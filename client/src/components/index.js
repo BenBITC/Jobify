@@ -11,3 +11,4 @@ export { default as SubmitButton } from "./SubmitButton";
 export { default as StatsContainer } from "./StatsContainer";
 export { default as ChartsContainer } from "./ChartsContainer";
 export { default as LoadingIndicator } from "./LoadingIndicator";
+export { default as ErrorElement } from "./ErrorElement";
