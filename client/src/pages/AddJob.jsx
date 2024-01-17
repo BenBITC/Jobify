@@ -6,19 +6,22 @@ import { Form, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import apiFetch from "../utils/apiFetch";
 
-export const addJobAction = async ({ request }) => {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
+export const addJobAction =
+  (queryClient) =>
+  async ({ request }) => {
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData);
 
-  try {
-    await apiFetch.post("/jobs", data);
-    toast.success("Job created");
-    return redirect("/dashboard/all-jobs");
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
-    return error;
-  }
-};
+    try {
+      await apiFetch.post("/jobs", data);
+      queryClient.invalidateQueries(["jobs"]);
+      toast.success("Job created");
+      return redirect("/dashboard/all-jobs");
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      return error;
+    }
+  };
 
 const AddJob = () => {
   const { user } = useOutletContext();
