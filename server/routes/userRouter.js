@@ -12,7 +12,7 @@ import {
   forbidTestUser,
 } from "../middleware/authMiddleware.js";
 import { USER_ROLE } from "../utils/constants.js";
-import upload from "../middleware/multerMiddleware.js";
+import upload from "../middleware/fileUploadMiddleware.js";
 
 router.get("/current-user", getCurrentUser);
 router.get("/admin/app-stats", [
