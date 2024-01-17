@@ -12,7 +12,7 @@ import {
   SidebarLarge,
   SidebarSmall,
 } from "../components";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { checkDefaultTheme } from "../App";
 import apiFetch from "../utils/apiFetch";
 import { toast } from "react-toastify";
@@ -41,9 +41,9 @@ const DashboardLayout = ({ queryClient }) => {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const isPageLoading = navigation.state === "loading";
-
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme());
+  const [isAuthError, setIsAuthError] = useState(false);
 
   const toggleDarkTheme = () => {
     const newDarkTheme = !isDarkTheme;
@@ -60,6 +60,25 @@ const DashboardLayout = ({ queryClient }) => {
     queryClient.invalidateQueries();
     toast.success("Logout successful");
   };
+
+  useEffect(() => {
+    if (!isAuthError) {
+      return;
+    }
+    logoutUser();
+  }, [isAuthError]);
+
+  apiFetch.interceptors.response.use(
+    (reponse) => {
+      return reponse;
+    },
+    (error) => {
+      if (error?.response?.status === 401) {
+        setIsAuthError(true);
+      }
+      return Promise.reject(error);
+    }
+  );
 
   return (
     <DashboardContext.Provider

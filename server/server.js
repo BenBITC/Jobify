@@ -22,6 +22,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // MIDDLEWARE
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 import { authenticateUser } from "./middleware/authMiddleware.js";
+import helmet from "helmet";
+import mongoSanitize from "express-mongo-sanitize";
 
 // FILE STORAGE
 import cloudinary from "cloudinary";
@@ -41,10 +43,8 @@ if (process.env.NODE_ENV != "production") {
 app.use(express.static(path.resolve(__dirname, "../client/dist")));
 app.use(cookieParser());
 app.use(express.json());
-
-app.get("/api/v1/test", (req, res) => {
-  res.json({ message: "test route" });
-});
+app.use(helmet());
+app.use(mongoSanitize());
 
 // API ROUTING
 app.use("/api/v1/jobs", authenticateUser, jobRouter);
