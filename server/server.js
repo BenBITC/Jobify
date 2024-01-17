@@ -66,6 +66,7 @@ console.log("routers initialized...");
 // START THE SERVER
 const port = process.env.PORT || 5000;
 try {
+  console.log(`Mongo URL is ${process.env.MONGO_URL}`);
   await mongoose.connect(process.env.MONGO_URL);
   app.listen(port, () => {
     console.log(`Server is listening on port ${port}...`);
