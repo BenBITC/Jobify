@@ -1,4 +1,4 @@
-console.log("running server.js...");
+console.log("Running server.js...");
 
 import "express-async-errors";
 import * as dotenv from "dotenv";
@@ -26,7 +26,7 @@ import { authenticateUser } from "./middleware/authMiddleware.js";
 // FILE STORAGE
 import cloudinary from "cloudinary";
 
-console.log("imports complete...");
+console.log("Server.js imports successful");
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -61,13 +61,13 @@ app.use("*", (req, res) => {
 });
 app.use(errorHandlerMiddleware);
 
-console.log("routers initialized...");
-
 // START THE SERVER
 const port = process.env.PORT || 5000;
 try {
+  console.log("Routers initialized, connecting to MongoDB");
   console.log(`Mongo URL is ${process.env.MONGO_URL}`);
   await mongoose.connect(process.env.MONGO_URL);
+  console.log("Connected to MongoDB");
   app.listen(port, () => {
     console.log(`Server is listening on port ${port}...`);
   });
