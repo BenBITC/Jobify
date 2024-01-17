@@ -1,3 +1,5 @@
+console.log("running server.js...");
+
 import "express-async-errors";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -23,6 +25,8 @@ import { authenticateUser } from "./middleware/authMiddleware.js";
 
 // FILE STORAGE
 import cloudinary from "cloudinary";
+
+console.log("imports complete...");
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -56,6 +60,8 @@ app.use("*", (req, res) => {
   res.status(404).json({ message: "Not found" });
 });
 app.use(errorHandlerMiddleware);
+
+console.log("routers initialized...");
 
 // START THE SERVER
 const port = process.env.PORT || 5000;
