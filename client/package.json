@@ -20,16 +20,16 @@
     "react-router-dom": "^6.10.0",
     "react-toastify": "^9.1.2",
     "recharts": "^2.5.0",
-    "styled-components": "^5.3.10"
+    "styled-components": "^5.3.10",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
-    "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.0.8"
+    "eslint-plugin-react-refresh": "^0.4.5"
   }
 }
